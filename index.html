@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장바구니</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="main.css" />
+
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>장바구니 목록</h1>
+
+      <div class="input-box">
+        <input type="text" placeholder="입력하세요." />
+        <div class="material-icons">add</div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="list">
+        <ul>
+          <li>
+            <p>계란 한판</p>
+            <div class="edit material-icons">border_color</div>
+            <div class="delete material-icons">delete</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="delete-all">
+        전체 삭제
+        <div class="material-icons">delete</div>
+      </div>
+    </div>
+  </body>
+</html>
