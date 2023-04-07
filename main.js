@@ -8,34 +8,46 @@
 const inputEl = document.querySelector('.input-box input');
 const btnAddEl = document.querySelector('.input-box .material-icons');
 const listEl = document.querySelector('.list ul');
-
 const btnClear = document.querySelector('.delete-all');
+
 btnClear.addEventListener('click', clearAll);
+btnAddEl.addEventListener('click', clickSubmit);
 
-btnAddEl.addEventListener('click', addItem);
+let isEdit = false;
 
-// 아이템 추가
-function addItem() {
+// + 버튼 클릭
+function clickSubmit() {
   const input = inputEl.value;
-  const liEl = document.createElement('li');
 
   if (input === '') {
     return;
   }
 
-  liEl.innerHTML = /*html*/ `
-    <p>${input}</p>
-    <div class="edit material-icons">border_color</div>
-    <div class="delete material-icons">delete</div>
-  `;
-  listEl.appendChild(liEl);
-
-  const btnDelete = liEl.querySelector('.delete');
-  btnDelete.addEventListener('click', function () {
-    deleteItem(liEl);
-  });
+  if (isEdit) {
+    editItem(input);
+  } else {
+    addItem(input);
+  }
 
   inputEl.value = null; // Input 초기화
+}
+
+// 아이템 추가
+function addItem(title) {
+  const liEl = document.createElement('li');
+  console.log(title);
+  liEl.innerHTML = /*html*/ `
+      <p>${title}</p>
+      <div class="edit material-icons">border_color</div>
+      <div class="delete material-icons">delete</div>
+    `;
+  listEl.appendChild(liEl);
+
+  // 아이템 수정, 삭제 버튼
+  const btnEdit = liEl.querySelector('.edit');
+  const btnDelete = liEl.querySelector('.delete');
+  btnEdit.addEventListener('click', () => clickEdit(liEl));
+  btnDelete.addEventListener('click', () => deleteItem(liEl));
 }
 
 // 아이템 삭제
@@ -43,7 +55,21 @@ function deleteItem(el) {
   listEl.removeChild(el);
 }
 
-// TODO : 아이템 수정
+// 아이템 수정
+function editItem(title) {
+  const editEl = listEl.querySelector('.edit-mode');
+  editEl.textContent = title;
+  isEdit = false;
+}
+
+// 수정버튼 클릭
+function clickEdit(el) {
+  const titleEl = el.querySelector('p');
+  titleEl.classList.add('edit-mode');
+  inputEl.value = titleEl.innerHTML;
+  inputEl.focus();
+  isEdit = true;
+}
 
 // 전체 삭제
 function clearAll() {
