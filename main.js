@@ -59,6 +59,7 @@ function deleteItem(el) {
 function editItem(title) {
   const editEl = listEl.querySelector('.edit-mode');
   editEl.textContent = title;
+  editEl.classList.remove('edit-mode');
   isEdit = false;
 }
 
@@ -72,11 +73,28 @@ function clickEdit(el) {
 }
 
 // 전체 삭제
+// modal
+const modalEl = document.querySelector('.modal-wrap');
+const btnModalConfirm = modalEl.querySelector('.confirm');
+const btnModalCancel = modalEl.querySelector('.cancel');
+console.log(btnModalConfirm);
 function clearAll() {
+  if (listEl.childNodes.length === 0) {
+    return;
+  }
+  modalEl.classList.add('show');
+}
+
+btnModalConfirm.addEventListener('click', () => {
   const items = listEl.querySelectorAll('li');
   if (items.length > 0) {
     items.forEach(el => {
       listEl.removeChild(el);
     });
+    modalEl.classList.remove('show');
   }
-}
+});
+
+btnModalCancel.addEventListener('click', () => {
+  modalEl.classList.remove('show');
+});
