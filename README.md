@@ -14,3 +14,4 @@
 - Array.filter()
 - Array.map()
 - LocalStorage
+- Modal
